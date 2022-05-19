@@ -1,0 +1,2 @@
+{{bind.blank.first.cfg.setting}}
+write-host "I am entering blank2 install {{cfg.setting1}}"

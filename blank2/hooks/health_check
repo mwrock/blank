@@ -1,0 +1,2 @@
+# Write-host "I am running a blank 2 health check"
+exit 0

@@ -1,0 +1,11 @@
+Write-host "I am running"
+try {
+    while ($true) {
+        write-host "still running...SETTING1: {{cfg.setting1}}"
+        $ec = (Get-Content c:\dev\blank\exit_code)
+        if ($ec -ne 0) { exit $ec }
+        Start-Sleep 1
+    }
+} finally {
+    write-host "in finally block"
+}

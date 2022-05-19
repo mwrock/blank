@@ -1,0 +1,9 @@
+    Write-Host "this is the blank 1 run"
+    Write-Host "SETTING2: {{cfg.setting2}}"
+{{#if bind.blank}}
+Write-Host "bound SETTING: {{bind.blank.first.cfg.setting}}"
+{{/if}}
+
+while ($true) {
+    Start-Sleep 1
+}

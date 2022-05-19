@@ -1,0 +1,42 @@
+version: '3'
+services:
+  first_peer:
+    image: mwrock/blank1
+    ports:
+      - "9631:9631"
+      - "9632"
+    environment:
+      - HAB_LICENSE=accept-no-persist
+      - HAB_LISTEN_CTL=0.0.0.0:9632
+    command: --strategy rolling --topology standalone --channel unstable --update-condition track-channel
+  bad_peer:
+    image: mwrock/blank1
+    ports:
+      - "9631"
+      - "9632"
+    environment:
+      - HAB_LICENSE=accept-no-persist
+      - HAB_LISTEN_CTL=0.0.0.0:9632
+      - RUST_LOG=warn,reqwest=debug
+    links:
+      - first_peer
+    depends_on:
+      - first_peer
+    command: --peer first_peer --strategy rolling --topology standalone --channel unstable --update-condition track-channel
+  peer:
+    image: mwrock/blank1
+    ports:
+      - "9631"
+      - "9632"
+    environment:
+      - HAB_LICENSE=accept-no-persist
+      - HAB_LISTEN_CTL=0.0.0.0:9632
+    links:
+      - first_peer
+    depends_on:
+      - first_peer
+    command: --peer first_peer --strategy rolling --topology standalone --channel unstable --update-condition track-channel
+networks:
+  default:
+    external:
+      name: nat

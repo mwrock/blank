@@ -1,0 +1,5 @@
+{{#if bind.blank}}
+Write-Host "SETTING: {{bind.blank.first.cfg.setting}}"
+{{/if}}
+
+write-host "I am entering init"
